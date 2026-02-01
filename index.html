@@ -22,7 +22,7 @@
       border-radius: 20px;
       box-shadow: 0 15px 30px rgba(0,0,0,0.25);
       text-align: center;
-      width: 320px;
+      width: 340px;
     }
 
     .title {
@@ -68,8 +68,24 @@
       background: #4d79ff;
       color: white;
       position: absolute;
-      left: 170px;
+      left: 180px;
       top: 40px;
+    }
+
+    /* Result section */
+    .result {
+      display: none;
+    }
+
+    .result img {
+      width: 220px;
+      border-radius: 15px;
+      margin: 15px 0;
+    }
+
+    .love-text {
+      font-size: 1.3em;
+      color: #ff4d6d;
     }
   </style>
 </head>
@@ -78,37 +94,41 @@
   <div class="card">
     <div class="title">Hi Lyna 💙</div>
 
-    <div class="question">Do you love me?</div>
+    <div id="questionBox">
+      <div class="question">Do you love me?</div>
 
-    <div class="button-area" id="area">
-      <button class="yes" onclick="yesClick()">Yes ❤️</button>
-      <button class="no" id="noBtn" onclick="moveNo()">No 😢</button>
+      <div class="button-area" id="area">
+        <button class="yes" onclick="yesClick()">Yes ❤️</button>
+        <button class="no" id="noBtn" onclick="moveNo()">No 😢</button>
+      </div>
+    </div>
+
+    <div class="result" id="result">
+      <img src="https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUyNWNzZHU5b2EzdXg4NHc1d2xna2N1Znllc3doZnNtZ21lNWc3b3h3ZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ujTVMASREzuRbH6zy5/giphy.gif" alt="Dancing Kid">
+      <div class="love-text">
+        I knew it 😍<br>
+        I love you too, Lyna 💙
+      </div>
     </div>
   </div>
 
   <script>
     const noBtn = document.getElementById("noBtn");
     const area = document.getElementById("area");
+    const questionBox = document.getElementById("questionBox");
+    const result = document.getElementById("result");
 
     function moveNo() {
-      const areaWidth = area.clientWidth;
-      const areaHeight = area.clientHeight;
+      const maxX = area.clientWidth - noBtn.offsetWidth;
+      const maxY = area.clientHeight - noBtn.offsetHeight;
 
-      const btnWidth = noBtn.offsetWidth;
-      const btnHeight = noBtn.offsetHeight;
-
-      const maxX = areaWidth - btnWidth;
-      const maxY = areaHeight - btnHeight;
-
-      const x = Math.random() * maxX;
-      const y = Math.random() * maxY;
-
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
+      noBtn.style.left = Math.random() * maxX + "px";
+      noBtn.style.top = Math.random() * maxY + "px";
     }
 
     function yesClick() {
-      alert("l' knew it😍💙\nI love you too,!");
+      questionBox.style.display = "none";
+      result.style.display = "block";
     }
   </script>
 
